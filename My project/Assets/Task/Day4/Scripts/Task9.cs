@@ -4,6 +4,39 @@ using UnityEngine;
 
 public class Task9 : MonoBehaviour
 {
+    // 내부 클래스에서 사용하는 델리게이트 예시
+    
+    delegate void OnDoSomething(int i);
+
+    OnDoSomething _onDoSomething = null;
+
+
+    public void DoTest()
+    {
+        int tx = 2;
+        if(tx == 1)
+            _onDoSomething = DoAnything;
+        else
+            _onDoSomething = DoEverything;
+
+        _onDoSomething?.Invoke(0);
+    }
+
+    private void DoAnything(int ak)
+    {
+        Debug.Log("anything");
+    }
+
+    private void DoEverything(int ak)
+    {
+        Debug.Log("Everything");
+    }
+
+    void Start()
+    {
+        DoTest();
+    }
+
 /*
     where T : class  = T는 참조 형식이어아한다. 
     where T : struct = T는 값 형식이어야한다.

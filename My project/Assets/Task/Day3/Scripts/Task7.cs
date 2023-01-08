@@ -35,7 +35,7 @@ public class Task7 : MonoBehaviour  //To do .. : 예외처리
 
     private void Start()
     {
-        if(Mlist.Find(tmp => tmp == Name) == null)
+        if(Mlist.Find(tmp => tmp == Name) == null)  // 입력한 사람의 정보가 없을 시 로그 출력 후 종료.
         {
             Debug.Log("'" + Name + "' 라는 사람이 목록에 없습니다.");
             return;
@@ -48,12 +48,12 @@ public class Task7 : MonoBehaviour  //To do .. : 예외처리
     {
         var str = new StringBuilder();
 
-        if(!numdict.TryGetValue(name, out var number))
+        if(!numdict.TryGetValue(name, out var number))  // 이름 - 번호 딕셔너리에서 이름을 기반으로 번호 찾기
             number = int.MinValue;
-        if(!listdict.TryGetValue(name, out var list))
-            list = null ;
+        if(!listdict.TryGetValue(name, out var list))   // 이름 - 목록 리스트 딕셔너리에서 이름을 기반으로 리스트 찾기
+            list = null;
         
-        for(int i = 0; i < this.list[number-1].Count; i++) 
+        for(int i = 0; i < this.list[number-1].Count; i++)
         { 
             if(0<i)
                 str.Append(", ");

@@ -1,33 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+using System.Text;
 
 
 public class Task10 : MonoBehaviour
 {
-
-    public T CalcSomeCount<T>(T number)
+    private int CalcSomeCount<T>(T num)
     {
-        Type itemType = typeof(T);
+        if(!double.TryParse(num.ToString(), out var d))
+            throw new System.Exception("지원하지 않는 형입니다. {typeof(T).Name}");
+        
+        if(d < 0)
+            d*= -1.0;
+        
+        var count = 0;
 
-        var tmp = (double)(object)number; //타입넣는방법?
-
-        if (tmp < 0)
-            tmp *= -1;
-
-        int count = 0;
-
-        while (1 < tmp)
+        while(1.0 < d)
         {
             ++count;
-            tmp /= 2;
+            d /= 2.0;
         }
 
-        Debug.Log(count);
-
-        return number;
+        return count;
     }
+    // public T CalcSomeCount<T>(T number)
+    // {
+    //     Type itemType = typeof(T);
+
+    //     var tmp = (double)(object)number; //타입넣는방법?
+
+    //     if (tmp < 0)
+    //         tmp *= -1;
+
+    //     int count = 0;
+
+    //     while (1 < tmp)
+    //     {
+    //         ++count;
+    //         tmp /= 2;
+    //     }
+
+    //     Debug.Log(count);
+
+    //     return number;
+    // }
 
 
     // List<string> typ = new List<string>() {"System.Double"};
@@ -81,10 +98,10 @@ public class Task10 : MonoBehaviour
 
     void Start()
     {
-        CalcSomeCount((double)10.0);
-        //Debug.Log(CalcSomeCount((float)-20.0f));
-        //Debug.Log(CalcSomeCount((int)13));
-        //Debug.Log(CalcSomeCount((string)"-123"));
-        //Debug.Log(CalcSomeCount((string)"asdf"));
+        Debug.Log($"double : {CalcSomeCount<double>(10.0)}");
+        Debug.Log($"float  : {CalcSomeCount<float>(-20.0f)}");
+        Debug.Log($"int    : {CalcSomeCount<int>(13)}");
+        Debug.Log($"string : {CalcSomeCount<string>("-123")}");
+        Debug.Log($"string : {CalcSomeCount<string>("asdf")}");
     }
 }

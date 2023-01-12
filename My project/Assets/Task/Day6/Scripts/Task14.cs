@@ -114,9 +114,9 @@ public sealed class BST<T> : IEnumerable<T>
 
 		public bool Remove(T value)
 		{
-            BSTNode<T> node = Find(value);
+            // BSTNode<T> node = Find(value);
             
-            // 이 아래로 작동하지 않아 주석 처리
+            // // 이 아래로 작동하지 않아 주석 처리
 
             // if(node.LeftNode == null && node.RightNode == null)
             // {

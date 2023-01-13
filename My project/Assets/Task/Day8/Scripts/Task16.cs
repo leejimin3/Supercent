@@ -20,7 +20,7 @@ public sealed class Graph<T> : IEnumerable<GraphNode<T>>
 
     public bool Contains(T vertex)
     {
-        foreach(KeyValuePair<T, GraphNode<T>> i in nodes)           // TryGetValue랑 최적화 하고싶다.
+        foreach(KeyValuePair<T, GraphNode<T>> i in nodes)           // TryGetValue랑 최적화 가능한가? >> result를 Isvalid할 수 있는 조건만 있으면 가능할 듯.
         {
             if(i.Key.Equals(vertex)) return true;
         }
@@ -51,8 +51,8 @@ public sealed class Graph<T> : IEnumerable<GraphNode<T>>
     public void SetEdgeJOB(T a, T b, int weight)        //시작 노드와 끝 노드를 저장 후 노드에 알맞은 값 입력
     {
         GraphNode<T> FromNode = null, Endnode = null;
-        foreach(KeyValuePair<T, GraphNode<T> > i in nodes)
-        {
+        foreach(KeyValuePair<T, GraphNode<T> > i in nodes)      //지오님 코드 확인 후 >> nodes[a]로 찾으면 됐다..! >>> var써도 상관없었다! var은 바리에이드라고 읽음. GC차이는 크게 없음
+        {                                                       //추가로 String의 합치기는 StringBuilder를 쓰는게 메모리 손실을 덜 발생시킨다.
             if(i.Key.Equals(a))
                 FromNode = i.Value;
             if(i.Key.Equals(b))
@@ -60,7 +60,7 @@ public sealed class Graph<T> : IEnumerable<GraphNode<T>>
         }
 
         if(FromNode == null || Endnode == null)
-            throw new Exception("버텍스의 노트를 찾을 수 없습니다.");
+            throw new Exception("버텍스의 노드를 찾을 수 없습니다.");       //이 예외처리를 위로 올렸으면 더 좋았을 듯!!
 
         GraphNode<T>.Edge edgeTmp = new GraphNode<T>.Edge();
         edgeTmp.Vertex = b;
@@ -105,7 +105,7 @@ public sealed class Graph<T> : IEnumerable<GraphNode<T>>
     //     //...
     // }
 
-    // public void Clear()
+    // public void Clear()              node.Clear()와 node를 가리키고 있는 간선들도 제거 해주면 좋을 듯. 
     // {
     //     // 모든 정점, 간선을 정리
     //     //...
@@ -125,10 +125,10 @@ public sealed class Graph<T> : IEnumerable<GraphNode<T>>
 public class GraphNode<T> : IEnumerable<KeyValuePair<T, int>>
 {
     public T Vertex;
-
-    //public List<GraphNode<T>.Edge> edge = new List<GraphNode<T>.Edge>();
+    private const int MaxCnt = 100;
+    //public List<GraphNode<T>.Edge> edge = new List<GraphNode<T>.Edge>(); //딕셔너리로 처리
     public int edgeCnt = 0;
-    public GraphNode<T>.Edge[] edge = new GraphNode<T>.Edge[100];   //100은 임의 설정
+    public GraphNode<T>.Edge[] edge = new GraphNode<T>.Edge[MaxCnt];   //100은 임의 설정
     
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -144,6 +144,8 @@ public class GraphNode<T> : IEnumerable<KeyValuePair<T, int>>
         public GraphNode<T> Node;   //진행할 노드
         public int Weight;          //가중치
     }
+
+    // 지오님 코드 확인 후 >> 여기에 Set과 Release를 놓으면 Edge를 쉽게 조절 가능
 }
 
 

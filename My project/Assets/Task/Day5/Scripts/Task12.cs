@@ -1,32 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 
 public sealed class List<T> : IEnumerable<T>
 {
-    int DefaultCount = 4;
+    int DefaultCount = 4;                       //기본 카운트를 4로 설정한다. 이유는 리스트가 생성될때 기본으로 4의 공간을 할당하기 때문
     T[] Array = new T[0];
     public int Count { private set; get; } = 0;
 
-    public T this[int index]
+    public T this[int index]        //set, get에 index가 0보다 작을 시와 Count보다 클 경우의 예외처리를 해야한다.
     {
         set
         {
-            Array[index] = value;
+            // if (index < 0)                                           //Set, Get에 들어갔어야 할 예외처리
+            //     throw new Exception("index가 0보다 작습니다");
+            // if (Count <= index)
+            //     throw new Exception($"index가 {Count}보다 크거나 같습니다");
+
+            Array[index] = value;           //Ex) Array[4] = 4 로 설정했을 때 set을 통해 값 set
         }
         get
         {
-            return Array[index];
+            return Array[index];            //Debug.Log(list[4])를 입력받을 시 get을 통해 값 전달
         }
     }
 
     public List()
     {
-        Array = new T[DefaultCount];
+        Array = new T[DefaultCount];        //리스트는 제네릭형 배열로 구성되어 있음
     }
 
-    public bool Contains(T value)
+    public bool Contains(T value)           // 원하는 값이 리스트에 들어가 있는지 확인 후 반환
     {
         foreach (T i in Array)
         {
@@ -36,24 +41,24 @@ public sealed class List<T> : IEnumerable<T>
         return false;
     }
 
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();     //지정해 놓은 Ienumerable을 통해 값 출력
 
     public IEnumerator<T> GetEnumerator()
     {
-        for (int i = 0; i < Array.Length; i++)
+        for (int i = 0; i < Count; i++)   // 이 부분을 Array.Length까지로 선언했었는데 그러면 값이 배열의 총 크기만큼 출력됨. 우리가 원하는 건 할당된 배엶만 출력하는 것이므로 Count로 하는게 맞음
         {
             yield return Array[i];
         }
     }
 
-    public void Add(T value)
+    public void Add(T value)        //Capacity를 재조정해야하는지 확인 후 값 추가
     {
         UpdateCapacity();
         Array[Count] = value;
         Count++;
     }
 
-    public void Insert(int index, T value)
+    public void Insert(int index, T value)  //Capacity재조정을 확인 후 값 삽입
     {
         UpdateCapacity();
 
@@ -67,7 +72,7 @@ public sealed class List<T> : IEnumerable<T>
 
     }
 
-    public bool Remove(T value)
+    public bool Remove(T value)                 //값을 찾고 있다면 없애고 배열 당겨오기
     {
         for (int i = 0; i < Count; i++)
         {
@@ -111,7 +116,7 @@ public sealed class List<T> : IEnumerable<T>
         Count = 0;
     }
 
-    void UpdateCapacity()
+    void UpdateCapacity()           //Capacity2배로 증가
     {
         if (Array.Length == Count)
         {

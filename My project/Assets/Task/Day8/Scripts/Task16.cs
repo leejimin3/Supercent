@@ -18,7 +18,7 @@ public sealed class Graph<T> : IEnumerable<GraphNode<T>>
         return graphnode;
     }
 
-    public bool Contains(T vertex)
+    public bool Contains(T vertex)  //있는 메소드 쓰기
     {
         foreach(KeyValuePair<T, GraphNode<T>> i in nodes)           // TryGetValue랑 최적화 가능한가? >> result를 Isvalid할 수 있는 조건만 있으면 가능할 듯.
         {

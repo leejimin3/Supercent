@@ -1,5 +1,5 @@
 # 💎[Supercent] 하이퍼 캐주얼 게임 개발 아카데미 2기
-스크립트 경로 : Asset/Task/Day/Scripts
+스크립트 경로 : My Project/Asset/Task/Day/Scripts
 
 ---
 

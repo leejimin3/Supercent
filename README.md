@@ -5,9 +5,12 @@
 
 ## What is this Repository?
 
-SuperCent에서 진행한 하이퍼 캐주얼 게임 개발 아카데미 2기를 참여하며 배운 내용과  코드를 정리하는 Repository
+SuperCent에서 진행한 하이퍼 캐주얼 게임 개발 아카데미 2기를 참여하며 배운 내용과 코드를 정리하는 Repository  
+
+(이 Repository는 자료형 Repository. Workflow를 사용하지 않음)
 
 ---
+
 ## 강의 커리큘럼
 
 ### 1주차

@@ -75042,7 +75042,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 6.366667
+    m_StopTime: 6.3333335
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -149163,10 +149163,10 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 6.366667
-    functionName: ResetTimedelta
+  - time: 6
+    functionName: ST_Action
     data: 
-    objectReferenceParameter: {fileID: 11500000, guid: 15464f96d4ce448d797102f665349dcd, type: 3}
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

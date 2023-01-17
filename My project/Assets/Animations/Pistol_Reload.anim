@@ -79513,7 +79513,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 1
   m_Events:
   - time: 2.1666667
-    functionName: StopReload
+    functionName: ST_Reload
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 15464f96d4ce448d797102f665349dcd, type: 3}
     floatParameter: 0

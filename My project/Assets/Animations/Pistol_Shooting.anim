@@ -30526,7 +30526,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 1.1666666
-    functionName: StopShoot
+    functionName: ST_Shoot
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 15464f96d4ce448d797102f665349dcd, type: 3}
     floatParameter: 0

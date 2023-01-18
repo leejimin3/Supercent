@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
+            Anim.SetInteger(ANIM_RANDOMINT, 0);
             Anim.SetBool(ANIM_IDLE, false);
             Anim.SetBool(ANIM_MOVE, true);
         }
@@ -75,10 +76,11 @@ public class Player : MonoBehaviour
         return false;
     }
 
-    void TryShot()
+    void TryShot()      //리로드 중 사격됨 처
     {
         if(CurrentBullet > 0)
         {
+            Anim.SetInteger(ANIM_RANDOMINT, 0);
             Anim.SetBool(ANIM_IDLE, false);
             Anim.SetBool(ANIM_SHOOT, true);
 

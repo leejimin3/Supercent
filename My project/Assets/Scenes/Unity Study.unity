@@ -595,8 +595,6 @@ MonoBehaviour:
   Anim: {fileID: 905772531}
   Speed: 0
   mouseDownPos: {x: 0, y: 0, z: 0}
-  MoveStartAt: 0
-  MoveStopAt: 0
   lastIdleActionAt: 0
   MaxBullet: 7
   CurrentBullet: 7

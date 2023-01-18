@@ -11,15 +11,22 @@ public class Player : MonoBehaviour
     static readonly int ANIM_SHOOT = Animator.StringToHash("isShoot");
     static readonly int ANIM_RELOAD = Animator.StringToHash("isReload");
     static readonly int ANIM_RANDOMINT = Animator.StringToHash("RandomInt");
+
+    static readonly int ANIM_MOVE_SPEED = Animator.StringToHash("Blend");
     
     [SerializeField] Animator Anim = null;
 
     [Space]
-    [SerializeField] float Speed = 0.0f;
-    [SerializeField] Vector3 mouseDownPos = Vector3.zero;
-    //[SerializeField] float MoveStartAt = 0.0f;
-    //[SerializeField] float MoveStopAt = 0.0f;
+    [SerializeField] float Speed = 1f;
+    [SerializeField] float CanMove = 10.0f; //최소 이동 거리(_moveThreshold)
+    [SerializeField] Vector3 MouseDownPos = Vector3.zero;
+    [SerializeField] float MoveStart = 0.0f;
+    [SerializeField] float MoveStop = 0.0f;
     [SerializeField] float lastIdleActionAt = 0.0f;
+    
+    [Space]
+    [SerializeField] AnimationCurve MoveCurve = null;
+    [SerializeField] float MoveAccelTime = 1.0f;
     
     [Space]
     [SerializeField] int MaxBullet = 7;
@@ -57,17 +64,37 @@ public class Player : MonoBehaviour
             Anim.SetInteger(ANIM_RANDOMINT, 0);
             Anim.SetBool(ANIM_IDLE, false);
             Anim.SetBool(ANIM_MOVE, true);
+
+            MouseDownPos = Input.mousePosition;
+            MoveStart = Time.time;
+            return true;
         }
 
-        if(Input.GetMouseButton(0))
+        if(Input.GetMouseButton(0)) //여기서부터 다시공부
         {
-            Debug.Log("press");
-            lastIdleActionAt = Time.time;
+            var delta = Input.mousePosition - MouseDownPos;
+            if(delta.magnitude > CanMove)
+            {
+                var angle = Mathf.Atan2(delta.x, delta.y) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0.0f, angle, 0.0f), 10.0f * Time.deltaTime); // ?
+            }
+
+            var moveTime = Time.time - MoveStart;
+            var currentSpeed = Mathf.Lerp(0.0f, Speed, MoveCurve.Evaluate(moveTime / MoveAccelTime));
+            
+            Anim.SetFloat(ANIM_MOVE_SPEED, currentSpeed);
+            transform.Translate(transform.forward * currentSpeed * Time.deltaTime, Space.World);
+
             return true;
         }
 
         if(Input.GetMouseButtonUp(0))
         {
+            lastIdleActionAt = Time.time;
+
+            MoveStop = Time.time;
+            Anim.SetFloat(ANIM_MOVE_SPEED, 0);            
+
             Anim.SetBool(ANIM_MOVE, false);
             Anim.SetBool(ANIM_IDLE, true);
         }
@@ -76,7 +103,7 @@ public class Player : MonoBehaviour
         return false;
     }
 
-    void TryShot()      //리로드 중 사격됨 처
+    void TryShot()      //리로드 중 사격됨 처리
     {
         if(CurrentBullet > 0)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
+    [SerializeField] Camera camera = null;
     //DetectObj detectObj = new DetectObj();
     
     static readonly int ANIM_IDLE = Animator.StringToHash("isIdle");
@@ -15,7 +15,6 @@ public class Player : MonoBehaviour
     static readonly int ANIM_MOVE_SPEED = Animator.StringToHash("Blend");
     
     [SerializeField] Animator Anim = null;
-    //[SerializeField] GameObject Gun = null;
 
 
     [Space]
@@ -36,6 +35,9 @@ public class Player : MonoBehaviour
     [SerializeField] int CurrentBullet = 7;
     [SerializeField] bool isAim = false;
     [SerializeField] GameObject targetenemy = null;
+
+
+
     [Space]
     [SerializeField] float IdleActionInterval = 3.0f;
     [SerializeField] float ShootCoolTime = 1.2f;
@@ -49,15 +51,17 @@ public class Player : MonoBehaviour
         spine = Anim.GetBoneTransform(HumanBodyBones.Spine);
     }
 
-    void Update()
-    {       
-        //if(Input.GetKeyDown(KeyCode.Space))
-        
-        TryShot();
-        
 
+
+    void Update()
+    {   
         if(Anim == null)
             return;
+
+        if(GameManager.instance.GameEnd == true)
+            return;
+
+        TryShot();
 
         if(TryMove())
             return;
@@ -69,6 +73,7 @@ public class Player : MonoBehaviour
     {
         TryDetectObj();
     }
+
 
 
 
@@ -119,6 +124,8 @@ public class Player : MonoBehaviour
         return false;
     }
 
+
+
     //조준 & 사격 부
     bool TryDetectObj()
     {
@@ -167,14 +174,20 @@ public class Player : MonoBehaviour
                 
                 if(targetenemy != null && targetenemy.TryGetComponent<Enemy>(out Enemy enemycomponent))
                 {
-                    enemycomponent.TakeDamage(Random.Range(10,21), this.gameObject);
+                    bool tmp = enemycomponent.TakeDamage(Random.Range(10,21), this.gameObject);
+                    camera.GetComponent<PlayerCamera>().Shake();
+                    
+                    
+                    if(tmp)
+                    {
+                        targetenemy = null;
+                        TryDetectObj();
+                    } 
                 }
 
                 CurrentBullet--;
-                //Debug.Log(CurrentBullet);
-                lastIdleActionAt = Time.time;
-                lastShootAt = Time.time;
-                
+                ST_Shoot();
+
                 if(CurrentBullet == 0)
                 {
                     Anim.SetBool(ANIM_SHOOT, false);
@@ -187,17 +200,18 @@ public class Player : MonoBehaviour
 
     bool TryIdleAction()
     {
-        if(Time.time - lastIdleActionAt < IdleActionInterval && !isAim)
+        if(Time.time - lastIdleActionAt < IdleActionInterval || !isAim)
         {
             return false;
         }
 
         lastIdleActionAt = Time.time;
         Anim.SetInteger(ANIM_RANDOMINT, UnityEngine.Random.Range(1, 3));
+        Debug.Log("ActionStart");
         return true;
     }
 
-//애니메이션 이벤트 호출 부
+//애니메이션 이벤트 호출 부 (애니메이션이 끝날 때)
 
 void ST_Action()
 {
@@ -220,6 +234,7 @@ void ST_Shoot()
     Anim.SetBool(ANIM_SHOOT, false);
     Anim.SetBool(ANIM_IDLE, true);
     lastIdleActionAt = Time.time;
+    lastShootAt = Time.time;
     return;
 }
 

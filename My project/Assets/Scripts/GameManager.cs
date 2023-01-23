@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,11 +10,13 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] GameObject enemy;
     [SerializeField] GameObject CompleteCanvas;
-    [SerializeField] GameObject btn;
 
     public int CurrentEnemyCount;
     private int MaxEnemyCount;
     public bool GameEnd;
+
+
+
 
     public Text text;
 
@@ -61,23 +64,52 @@ public class GameManager : MonoBehaviour
         float curfade = 0;
         float panelfade = 0.66f;
         float buttonfade = 1.0f;
+        float comtextfade = 1.0f;
         GameObject Panel = CompleteCanvas.GetComponent<Transform>().Find("Panel").gameObject;
         GameObject Button = CompleteCanvas.GetComponent<Transform>().Find("Button").gameObject;
-        while(curfade < 1.0f)
-        {    
+        GameObject ComText = CompleteCanvas.GetComponent<Transform>().Find("CompleteText").gameObject;
+
+        while (curfade < 1.0f)
+        {
+
             curfade += 0.01f;
             if(curfade < panelfade)
-            Panel.GetComponent<Image>().color = new Color(0, 0, 0, curfade);
+                Panel.GetComponent<Image>().color = new Color(0, 0, 0, curfade);
 
             if(curfade < buttonfade)
-            Button.GetComponent<Image>().color = new Color(0, 0, 0, curfade);
-            
+                Button.GetComponent<Image>().color = new Color(0, 0, 0, curfade);
+
+            if (curfade < comtextfade)
+                ComText.GetComponent<Text>().color = new Color(0, 0, 0, curfade);
+
             yield return new WaitForSeconds(0.01f);
         }
     }
     
     public void Restart()
     {
-        
+        StartCoroutine(RestartCorutine());
+    }
+
+    IEnumerator RestartCorutine()
+    {
+        GameObject Panel = CompleteCanvas.GetComponent<Transform>().Find("Panel").gameObject;
+        float curfade = Panel.GetComponent<Image>().color.a;
+        GameObject Button = CompleteCanvas.GetComponent<Transform>().Find("Button").gameObject;
+
+        Button.SetActive(false);
+
+
+
+        while (curfade < 1.0f)
+        {
+            curfade += 0.01f;
+            if (curfade < 1.0f)
+                Panel.GetComponent<Image>().color = new Color(0, 0, 0, curfade);
+
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        SceneManager.LoadScene(0);
     }
 }

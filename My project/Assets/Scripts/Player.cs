@@ -61,6 +61,7 @@ public class Player : MonoBehaviour
         if(GameManager.instance.GameEnd == true)
             return;
 
+
         TryShot();
 
         if(TryMove())
@@ -132,39 +133,43 @@ public class Player : MonoBehaviour
         Collider[] coll = Physics.OverlapSphere(transform.position, 10.0f);
         float min = 0f;
 
-
-        foreach (Collider col in coll)
+        if (coll != null)
         {
-            if(col.tag != "enemy")
-                continue;
-            
-            if(Physics.Linecast(transform.position, col.transform.position, LayerMask.GetMask("Wall")) == false)
+            foreach (Collider col in coll)
             {
-                float dis = Vector3.Distance(gameObject.transform.position, col.transform.position); //현재 거리
+                if (col.tag != "enemy")
+                    continue;
 
-                if(min == 0f || dis < min)
+
+
+                if (Physics.Linecast(transform.position, col.transform.position, LayerMask.GetMask("Wall")) == false)
                 {
-                    min = dis;
-                    targetenemy = col.gameObject;
+                    float dis = Vector3.Distance(gameObject.transform.position, col.transform.position); //현재 거리
+
+                    if (min == 0f || dis < min)
+                    {
+                        min = dis;
+                        targetenemy = col.gameObject;
+                    }
                 }
             }
-        }
 
-        if(targetenemy != null)
-        {
-            spine.rotation = Quaternion.LookRotation(targetenemy.transform.position);
-            spine.LookAt(targetenemy.transform.position);
-            isAim = true;
-            return true;
+            if (targetenemy != null)
+            {
+                spine.rotation = Quaternion.LookRotation(targetenemy.transform.position);
+                spine.LookAt(targetenemy.transform.position);
+                isAim = true;
+                return true;
+            }
         }
-
+        targetenemy = null;
         isAim = false;
         return false;
     }
 
     void TryShot()      //리로드 중 사격됨 처리
     {
-        if(isAim && Time.time - lastShootAt > ShootCoolTime)
+        if (targetenemy != null && Time.time - lastShootAt > ShootCoolTime)
         {
             if(CurrentBullet > 0)
             {
@@ -180,15 +185,14 @@ public class Player : MonoBehaviour
                     
                     if(tmp)
                     {
-                        targetenemy = null;
                         TryDetectObj();
                     } 
                 }
-
-                CurrentBullet--;
                 ST_Shoot();
+                CurrentBullet--;
+                targetenemy = null;
 
-                if(CurrentBullet == 0)
+                if (CurrentBullet == 0)
                 {
                     Anim.SetBool(ANIM_SHOOT, false);
                     Anim.SetBool(ANIM_RELOAD, true);

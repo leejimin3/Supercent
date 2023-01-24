@@ -5,7 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] Camera camera = null;
-    //DetectObj detectObj = new DetectObj();
     
     static readonly int ANIM_IDLE = Animator.StringToHash("isIdle");
     static readonly int ANIM_MOVE = Animator.StringToHash("isMove");

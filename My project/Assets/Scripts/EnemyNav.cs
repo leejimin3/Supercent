@@ -5,19 +5,34 @@ using UnityEngine.AI;
 
 public class EnemyNav : MonoBehaviour
 {
-    [SerializeField] private Transform movePositionTransform;
-
     private NavMeshAgent navMeshAgent;
+    Vector3 RandPos;
+    public bool Isdie;
 
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        SetRandomRange();
     }
 
     // Update is called once per frame
     void Update()
     {
-        navMeshAgent.destination = movePositionTransform.position;
-        //if문으로 처리 후 위치 랜덤으로 업데이트
+        if(Isdie)
+        {
+            navMeshAgent.destination = transform.position;
+        }
+        if(!Isdie)
+        {
+            if(Vector3.Distance(transform.position, RandPos) <= 0.1f)
+                SetRandomRange();
+        }
     }
+    
+    void SetRandomRange()
+    {
+        RandPos = new Vector3(Random.Range(-14f, 14f), 0,Random.Range(-10f, 18f));
+        navMeshAgent.destination = RandPos;
+    }
+
 }

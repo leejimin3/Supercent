@@ -36,6 +36,9 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject targetenemy = null;
 
 
+    [Space]
+    [SerializeField] GameObject Rayzer;
+
 
     [Space]
     [SerializeField] float IdleActionInterval = 3.0f;
@@ -178,11 +181,11 @@ public class Player : MonoBehaviour
                 
                 if(targetenemy != null && targetenemy.TryGetComponent<Enemy>(out Enemy enemycomponent))
                 {
-                    bool tmp = enemycomponent.TakeDamage(Random.Range(10,21), this.gameObject);
+                    StartCoroutine(ParticleCoroutine(transform.position, targetenemy.transform.position));
+                    bool die = enemycomponent.TakeDamage(Random.Range(10,21), this.gameObject);
                     camera.GetComponent<PlayerCamera>().Shake();
                     
-                    
-                    if(tmp)
+                    if(die)
                     {
                         TryDetectObj();
                     } 
@@ -213,6 +216,21 @@ public class Player : MonoBehaviour
         Debug.Log("ActionStart");
         return true;
     }
+
+
+IEnumerator ParticleCoroutine(Vector3 _player, Vector3 _enemy)
+{
+    var rayzer = Instantiate(Rayzer, _player, Quaternion.LookRotation(_enemy - _player));
+    rayzer.GetComponent<ParticleSystem>().Play();
+
+    while(Vector3.Distance(rayzer.transform.position, _enemy)> 0.1f)
+    {
+        Debug.Log("dfdf");
+        rayzer.transform.position = Vector3.Lerp(rayzer.transform.position, _enemy, 0.1f);
+        yield return null;
+    }
+    
+}
 
 //애니메이션 이벤트 호출 부 (애니메이션이 끝날 때)
 

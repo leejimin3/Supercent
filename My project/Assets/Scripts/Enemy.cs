@@ -19,6 +19,10 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] Rigidbody knockback = null;
 
+    [Space]
+    [SerializeField] GameObject blood;
+    [SerializeField] GameObject boom;
+
     Collider[] col = null;
     Rigidbody[] rig = null;
 
@@ -69,26 +73,37 @@ public class Enemy : MonoBehaviour
 
     public bool TakeDamage(float damage, GameObject obj)
     {
+
         canvas.SetActive(true);
         CurrentHealth -= damage;
         Anim.SetTrigger(ANIM_Hit);
+        HitParticle(obj.transform.position, transform.position);
         //애니
         if (CurrentHealth <= 0f)
         {
             SetRagdoll(true);
             GameManager.instance.EnemyDie();
-
-            var dir = transform.position - obj.transform.position;
-            Debug.Log(dir);
+            GetComponent<EnemyNav>().Isdie = true;
             this.tag = "Untagged";
+            var dir = transform.position - obj.transform.position;
             knockback.AddForce(dir * KnockBackPower + Vector3.up * 3f * KnockBackPower);
             Invoke("CanvasClose", 2.0f);
             Invoke("SinkEnemy", 3.0f);
+            
             return true;
         }
         Invoke("CanvasClose", 2.0f);
 
         return false;
+    }
+
+    void HitParticle(Vector3 _player, Vector3 _enemy)
+    {
+        var rot = Quaternion.LookRotation(_player - _enemy);
+        var greenblood = Instantiate(blood , transform.position, rot);
+        var bulletfire = Instantiate(boom , transform.position, rot);
+        greenblood.GetComponent<ParticleSystem>().Play();
+        boom.GetComponent<ParticleSystem>().Play();
     }
 
     void CanvasClose()

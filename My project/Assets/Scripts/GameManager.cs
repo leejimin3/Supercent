@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     
+    [SerializeField] GameObject player;
     [SerializeField] GameObject enemy;
     [SerializeField] GameObject CompleteCanvas;
 
@@ -15,11 +16,7 @@ public class GameManager : MonoBehaviour
     private int MaxEnemyCount;
     public bool GameEnd;
 
-
-
-
     public Text text;
-
     
     void Awake()
     {
@@ -48,6 +45,11 @@ public class GameManager : MonoBehaviour
 
         if(CurrentEnemyCount == MaxEnemyCount)
         {
+            Animator anim = player.GetComponent<Animator>();
+            anim.SetBool("isIdle", true);
+            anim.SetBool("isMove", false);
+            anim.SetBool("isShoot", false);
+
             GameEnd = true;
             CompletePanel();
         }

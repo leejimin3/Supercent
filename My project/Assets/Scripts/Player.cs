@@ -5,9 +5,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     //메인 카메라 >> 카메라 쉐이크 호출
+    [Space]
+    [Header("Camera")]
     [SerializeField] Camera camera = null;
     
-
     //애니메이터 파라미터
     static readonly int ANIM_IDLE = Animator.StringToHash("isIdle");
     static readonly int ANIM_MOVE = Animator.StringToHash("isMove");
@@ -15,16 +16,19 @@ public class Player : MonoBehaviour
     static readonly int ANIM_RELOAD = Animator.StringToHash("isReload");
     static readonly int ANIM_RANDOMINT = Animator.StringToHash("RandomInt");
     static readonly int ANIM_MOVE_SPEED = Animator.StringToHash("Blend");
-    
+    [Space]
+    [Header("Animator")]
     [SerializeField] Animator Anim;
 
     //걷기(Walk) 블렌더 커브와 값
     [Space]
+    [Header("Animation Blend")]
     [SerializeField] AnimationCurve MoveCurve = null;
     [SerializeField] float MoveAccelTime = 1.0f;
 
     //이동 관련
     [Space]
+    [Header("Movement")]
     [SerializeField] float Speed = 7.5f;    // 기본 이동 속도
     [SerializeField] float CanMove = 10.0f; // 최소 이동 거리(_moveThreshold) >> 마우스를 최소한 움직여야 하는 정도
     Vector3 MouseDownPos; // 처음 터치되는 자리
@@ -35,21 +39,27 @@ public class Player : MonoBehaviour
     
     // 사격 관련
     [Space]
+    [Header("Bullet")]
     [SerializeField] int MaxBullet = 7;     // 캐릭터 최대 총알 개수
     [SerializeField] int CurrentBullet = 7; // 현재 총알 개수
+    [SerializeField] float Range = 5.0f;
     GameObject targetenemy = null; // 에임중인 타겟
     bool isAim = false; // 캐릭터가 에임중인지 확인하는 파라미터
 
     // 쿨타임 관련
     [Space]
+    [Header("Cooldown")]
     [SerializeField] float IdleActionInterval = 3.0f; // 대기 모션 쿨타임 (애니메이션이 끝나는 시간 기준)
     [SerializeField] float ShootCoolTime = 1.2f; // 사격 쿨타임 (발사와 발사 사이 간격)
 
     // 파티클
     [Space]
+    [Header("Particles")]
     [SerializeField] GameObject Rayzer; // 레이저 파티클
 
+    //Spine뼈대
     [Space]
+    [Header("Spine")]
     [SerializeField] private Transform spine; // 상체 하체 분리 기준 bone (허리)
 
     //초기화 부분. 생성자처럼 사용 >> Awake에서 초기화 시 인스펙터에서 값을 설정해도 다시 초기화
@@ -150,7 +160,7 @@ public class Player : MonoBehaviour
     // 탐색
     bool TryDetectObj()
     {
-        Collider[] coll = Physics.OverlapSphere(transform.position, 7.5f);  // 7.5f의 구체를 만들어 구 안의 오브젝트의 콜라이더를 배열에 넣음
+        Collider[] coll = Physics.OverlapSphere(transform.position, Range);  // Range 사거리의 구체를 만들어 구 안의 오브젝트의 콜라이더를 배열에 넣음
         float min = 0f; // 가장 가까이 있는 오브젝트의 거리
         bool istarget = false; // 타겟이 있는지 유무
 
@@ -240,7 +250,7 @@ public class Player : MonoBehaviour
     // 파티클 코루틴
     IEnumerator ParticleCoroutine(Vector3 _player, Vector3 _enemy)
     {
-        var rayzer = Instantiate(Rayzer, _player, Quaternion.LookRotation(_enemy - _player));
+        var rayzer = Instantiate(Rayzer, spine.position, Quaternion.LookRotation(_enemy - _player));
         rayzer.GetComponent<ParticleSystem>().Play();
 
         while(Vector3.Distance(rayzer.transform.position, _enemy)> 0.1f)

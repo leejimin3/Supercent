@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     [SerializeField] private RectTransform rectTransform;
 
     [SerializeField, Range(0.01f, 150)]
-    private float leverRange;
+    private float leverRange = 100.0f;
 
     private void Awake()
     {

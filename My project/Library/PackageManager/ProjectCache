@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638102215680000000
-    m_Hash: 1631835102
+      ticks: 638104001300000000
+    m_Hash: 1010242877
   m_LockFileStatus:
     m_FilePath: /Users/supercent/Desktop/Supercent/My project/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638102215680000000
-    m_Hash: 1122277978
+      ticks: 638104001330000000
+    m_Hash: 1035663092
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -213,7 +213,7 @@ m_ResolvedPackages:
     version: default
   resolvedDependencies:
   - name: com.unity.ide.visualstudio
-    version: 2.0.17
+    version: 2.0.16
   - name: com.unity.test-framework
     version: 1.1.31
   - name: com.unity.ext.nunit
@@ -345,12 +345,12 @@ m_ResolvedPackages:
   unityLifecycle:
     version: 3.0.16
     nextVersion: 
-- packageId: com.unity.ide.visualstudio@2.0.17
+- packageId: com.unity.ide.visualstudio@2.0.16
   testable: 0
   isDirectDependency: 1
-  version: 2.0.17
+  version: 2.0.16
   source: 1
-  resolvedPath: /Users/supercent/Desktop/Supercent/My project/Library/PackageCache/com.unity.ide.visualstudio@2.0.17
+  resolvedPath: /Users/supercent/Desktop/Supercent/My project/Library/PackageCache/com.unity.ide.visualstudio@2.0.16
   assetPath: Packages/com.unity.ide.visualstudio
   name: com.unity.ide.visualstudio
   displayName: Visual Studio Editor
@@ -414,13 +414,13 @@ m_ResolvedPackages:
     configSource: 0
   hideInEditor: 0
   isAssetStorePackage: 0
-  datePublishedTicks: 638059987360000000
-  documentationUrl: https://docs.unity3d.com/Packages/com.unity.ide.visualstudio@2.0/manual/index.html
+  datePublishedTicks: 637914298680000000
+  documentationUrl: 
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/com.unity.ide.visualstudio.git
-    revision: 1f126893bfb18ea9661fb15771613e841467073c
+    revision: c01855ef6461b821ab0226135e96a4ee86de96be
     path: 
   unityLifecycle:
     version: 2.0.16

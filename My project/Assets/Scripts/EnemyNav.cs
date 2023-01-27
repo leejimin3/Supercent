@@ -15,7 +15,7 @@ public class EnemyNav : MonoBehaviour
         SetRandomRange();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if(Isdie)
@@ -31,7 +31,8 @@ public class EnemyNav : MonoBehaviour
     
     void SetRandomRange()
     {
-        RandPos = new Vector3(Random.Range(-14f, 14f), 0,Random.Range(-10f, 18f));
+        var tns = transform.position;
+        RandPos = new Vector3(Random.Range(-13f, 17f), 0,Random.Range(-9f, 39f));
         navMeshAgent.destination = RandPos;
     }
 

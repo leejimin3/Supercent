@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    //메인 카메라 >> 카메라 쉐이크 호출
-    [Space]
-    [Header("Camera")]
-    [SerializeField] Camera camera = null;
-    
     //애니메이터 파라미터
     static readonly int ANIM_IDLE = Animator.StringToHash("isIdle");
     static readonly int ANIM_MOVE = Animator.StringToHash("isMove");
@@ -16,6 +11,12 @@ public class Player : MonoBehaviour
     static readonly int ANIM_RELOAD = Animator.StringToHash("isReload");
     static readonly int ANIM_RANDOMINT = Animator.StringToHash("RandomInt");
     static readonly int ANIM_MOVE_SPEED = Animator.StringToHash("Blend");
+
+    //메인 카메라 >> 카메라 쉐이크 호출
+    [Space]
+    [Header("Camera")]
+    [SerializeField] Camera camera = null;
+
     [Space]
     [Header("Animator")]
     [SerializeField] Animator Anim;
@@ -25,6 +26,11 @@ public class Player : MonoBehaviour
     [Header("Animation Blend")]
     [SerializeField] AnimationCurve MoveCurve = null;
     [SerializeField] float MoveAccelTime = 1.0f;
+
+    [Space]
+    [Header("Audio")]
+    [SerializeField] AudioClip ShotSound = null;
+    [SerializeField] AudioClip ReloadSound = null;
 
     //이동 관련
     [Space]
@@ -40,9 +46,9 @@ public class Player : MonoBehaviour
     // 사격 관련
     [Space]
     [Header("Bullet")]
-    [SerializeField] int MaxBullet = 7;     // 캐릭터 최대 총알 개수
-    [SerializeField] int CurrentBullet = 7; // 현재 총알 개수
-    [SerializeField] float Range = 5.0f;
+    [SerializeField] public int MaxBullet = 7;     // 캐릭터 최대 총알 개수
+    [SerializeField] public int CurrentBullet = 7; // 현재 총알 개수
+    [SerializeField] float Range = 5.0f; // 사거리
     GameObject targetenemy = null; // 에임중인 타겟
     bool isAim = false; // 캐릭터가 에임중인지 확인하는 파라미터
 
@@ -206,28 +212,28 @@ public class Player : MonoBehaviour
                 Anim.SetBool(ANIM_IDLE, false);
                 Anim.SetBool(ANIM_SHOOT, true);
                 
-
                 if(targetenemy != null && targetenemy.TryGetComponent<Enemy>(out Enemy enemycomponent)) // 타켓이 있고 타켓이 Enemy컴포넌트를 가지고 있다면
                 {
                     StartCoroutine(ParticleCoroutine(transform.position, targetenemy.transform.position)); // 파티클 처리
                     bool die = enemycomponent.TakeDamage(Random.Range(10,21), this.gameObject); // 데미지 주고 죽었는지 반환
                     camera.GetComponent<PlayerCamera>().Shake(); // 카메라 쉐이크
                     
-                    if(die) // 죽었다면
-                    {
-                        TryDetectObj(); // 다시 주변 탐색
-                    } 
-                }
-                ST_Shoot(); // 샷 처리
-                CurrentBullet--; // 총알 감소
-                targetenemy = null; // 타겟 해제
+                    ST_Shoot(); // 샷 처리
+                    SoundManager.instance.PlayAudio("ShotSound", ShotSound);
+                    CurrentBullet--; // 총알 감소
+                    GameManager.instance.UpdateBullet(); // UI 업데이트
+                    targetenemy = null; // 타겟 해제
 
+                    if(die) { TryDetectObj(); } // 타겟이 죽었다면 다시 주변을 탐색해서 주변에 적이 있는지 확인
+                }
                 if (CurrentBullet == 0) // 총이 없으면 자동 장전
                 {
                     Anim.SetBool(ANIM_SHOOT, false);
                     Anim.SetBool(ANIM_RELOAD, true);
+                    SoundManager.instance.PlayAudio("ReloadSound", ReloadSound, 0.5f);
                 }
-                    return;
+                
+                return;
             }
         }
     }
@@ -253,7 +259,7 @@ public class Player : MonoBehaviour
         var rayzer = Instantiate(Rayzer, spine.position, Quaternion.LookRotation(_enemy - _player));
         rayzer.GetComponent<ParticleSystem>().Play();
 
-        while(Vector3.Distance(rayzer.transform.position, _enemy)> 0.1f)
+        while(Vector3.Distance(rayzer.transform.position, _enemy) > 0.1f)
         {
             rayzer.transform.position = Vector3.Lerp(rayzer.transform.position, _enemy, 0.1f);
             yield return null;

@@ -30,6 +30,11 @@ public class Enemy : MonoBehaviour
     Collider[] col = null;  // 래그돌 콜라이더
     Rigidbody[] rig = null;    // 래그돌 리지드바디
 
+    //사운드
+    [Space]
+    [Header("Sound")]
+    [SerializeField] AudioClip BoomSound = null;
+    [SerializeField] AudioClip BloodSound = null;
 
     // 애니매이터
     [Space]
@@ -137,8 +142,12 @@ public class Enemy : MonoBehaviour
         var rot = Quaternion.LookRotation(_player - _enemy);    // 방향을 LookRotation으로 받음
         var greenblood = Instantiate(blood , spine.position, rot);
         var bulletfire = Instantiate(boom , spine.position, rot);
+        
         greenblood.GetComponent<ParticleSystem>().Play();
+        SoundManager.instance.PlayAudio("BloodSound", BloodSound);
+        
         boom.GetComponent<ParticleSystem>().Play();
+        SoundManager.instance.PlayAudio("BoomSound", BoomSound);
     }
 
 

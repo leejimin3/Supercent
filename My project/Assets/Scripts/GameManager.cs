@@ -6,17 +6,19 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager instance; // 자기 자신을 정적 인스턴스로
     
     [SerializeField] GameObject player;
     [SerializeField] GameObject enemy;
     [SerializeField] GameObject CompleteCanvas;
 
+    
     public int CurrentEnemyCount;
     private int MaxEnemyCount;
     public bool GameEnd;
 
-    public Text text;
+    public Text Scoretext;
+    public Text Bullettext;
     
     void Awake()
     {
@@ -25,23 +27,25 @@ public class GameManager : MonoBehaviour
 
         MaxEnemyCount = enemy.transform.childCount;
         CurrentEnemyCount = 0;
-        UpdateText();
+        UpdateScoreText();
+        UpdateBullet();
     }
 
-    void Start()
+    public void UpdateBullet()
     {
-        
+        var BulletData = player.GetComponent<Player>();
+        Bullettext.text = BulletData.CurrentBullet.ToString() + " / " + BulletData.MaxBullet.ToString();
     }
 
-    void UpdateText()
+    void UpdateScoreText()
     {
-        text.text = CurrentEnemyCount.ToString() + " / " + MaxEnemyCount.ToString();
+        Scoretext.text = CurrentEnemyCount.ToString() + " / " + MaxEnemyCount.ToString();
     }
     
     public void EnemyDie()
     {
         CurrentEnemyCount++;
-        UpdateText();
+        UpdateScoreText();
 
         if(CurrentEnemyCount == MaxEnemyCount)
         {

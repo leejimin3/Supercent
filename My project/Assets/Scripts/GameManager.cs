@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] GameObject enemy;
     [SerializeField] GameObject CompleteCanvas;
+    [SerializeField] GameObject TimelineObj;
 
     
     public int CurrentEnemyCount;
@@ -62,6 +63,9 @@ public class GameManager : MonoBehaviour
     void CompletePanel()
     {
         CompleteCanvas.SetActive(true);
+        TimelineObj.gameObject.SetActive(true);
+        TimelineObj.GetComponent<TimeLineScripts>().MovCam();
+
         StartCoroutine(FadeinCoroutine());
     }
 

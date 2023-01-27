@@ -16,10 +16,11 @@ public class Player : MonoBehaviour
     [Space]
     [Header("Camera")]
     [SerializeField] Camera camera = null;
-
+    
+    //애니메이션
     [Space]
     [Header("Animator")]
-    [SerializeField] Animator Anim;
+    [SerializeField] public Animator Anim;
 
     //걷기(Walk) 블렌더 커브와 값
     [Space]

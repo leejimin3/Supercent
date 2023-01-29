@@ -66,8 +66,9 @@ public class Player : MonoBehaviour
 
     //Spine뼈대
     [Space]
-    [Header("Spine")]
+    [Header("Transform")]
     [SerializeField] private Transform spine; // 상체 하체 분리 기준 bone (허리)
+    [SerializeField] private Transform LHand; // 총알 에픽트가 날아갈 왼손
 
     //초기화 부분. 생성자처럼 사용 >> Awake에서 초기화 시 인스펙터에서 값을 설정해도 다시 초기화
     void Awake()
@@ -76,6 +77,7 @@ public class Player : MonoBehaviour
         Anim.SetBool(ANIM_IDLE, true);
 
         if(spine == null) spine = Anim.GetBoneTransform(HumanBodyBones.Spine);
+        if(LHand == null) LHand = Anim.GetBoneTransform(HumanBodyBones.LeftHand);
         MouseDownPos = Vector3.zero;
     }
 
@@ -257,7 +259,7 @@ public class Player : MonoBehaviour
     // 파티클 코루틴
     IEnumerator ParticleCoroutine(Vector3 _player, Vector3 _enemy)
     {
-        var rayzer = Instantiate(Rayzer, spine.position, Quaternion.LookRotation(_enemy - _player));
+        var rayzer = Instantiate(Rayzer, LHand.position, Quaternion.LookRotation(_enemy - _player));
         rayzer.GetComponent<ParticleSystem>().Play();
 
         while(Vector3.Distance(rayzer.transform.position, _enemy) > 0.1f)

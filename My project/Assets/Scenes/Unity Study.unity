@@ -3021,6 +3021,7 @@ MonoBehaviour:
   ShootCoolTime: 1.2
   Rayzer: {fileID: 193226, guid: ed28e53c93fc7d2449d7c68bb8409223, type: 3}
   spine: {fileID: 0}
+  LHand: {fileID: 0}
 --- !u!136 &1660936128
 CapsuleCollider:
   m_ObjectHideFlags: 0

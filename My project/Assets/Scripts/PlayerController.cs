@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
-// To do .. : 이 클래스에서 UI의 이미지만 처리하고 실질적인 움직임은 캐릭터에서 처리하는 것을 동일화 할 것
 public class PlayerController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] private RectTransform lever;

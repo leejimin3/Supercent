@@ -129,7 +129,7 @@ public class Player : MonoBehaviour
             }
 
             var moveTime = Time.time - MoveStart;   // 이동시간 측정
-            var currentSpeed = Mathf.Lerp(0.0f, Speed, MoveCurve.Evaluate(moveTime / MoveAccelTime)); // 현재 속력을 커브에 비교에 증가하도록한다 >> 현재는 0f 부터 1f까지 이니 Normalization 한 것이라고 생각하면 편하다
+            var currentSpeed = Mathf.Lerp(0.0f, Speed, MoveCurve.Evaluate(moveTime / MoveAccelTime)); // 현재 속력을 커브의 각도와 비교해 Normalize한다.
             
             Anim.SetFloat(ANIM_MOVE_SPEED, currentSpeed);   // 애니메이션 블렌드 속도 변환
             transform.Translate(transform.forward * currentSpeed * Time.deltaTime, Space.World); // 캐릭터 이동

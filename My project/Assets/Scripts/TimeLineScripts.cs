@@ -8,10 +8,6 @@ public class TimeLineScripts : MonoBehaviour
     [SerializeField] GameObject _player;
     [SerializeField] ParticleSystem particle;
     
-    void Start() 
-    {
-        float t = particle.startLifetime;
-    }
     public void MovCam()
     {
         _camera.transform.position += _player.transform.position;

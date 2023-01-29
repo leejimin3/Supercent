@@ -12,8 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject enemy;
     [SerializeField] GameObject CompleteCanvas;
     [SerializeField] GameObject TimelineObj;
+    [SerializeField] Button Btn;
 
-    
     public int CurrentEnemyCount;
     private int MaxEnemyCount;
     public bool GameEnd;
@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 
         MaxEnemyCount = enemy.transform.childCount;
         CurrentEnemyCount = 0;
+        Btn.onClick.AddListener(Restart);
         UpdateScoreText();
         UpdateBullet();
     }

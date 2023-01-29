@@ -2,6 +2,9 @@
 스크립트 경로 : My Project/Asset/Task/Day/Scripts
 
 ---
+## Preview
+
+---
 
 ## What is this Repository?
 
@@ -51,7 +54,7 @@ C# 걍의
   
 ### 6주차 ~ 8주차
 
-하이퍼 캐주얼 게임 제작
+하이퍼 캐주얼 게임 기획 & 제작
   
   
   

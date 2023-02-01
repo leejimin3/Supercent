@@ -100,7 +100,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 81
+  controlID: 79
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 112
+  controlID: 123
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_MinSize: {x: 500, y: 200}
   m_MaxSize: {x: 40480, y: 16192}
   vertical: 0
-  controlID: 18
+  controlID: 112
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -301,7 +301,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 111
+  controlID: 113
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -594,23 +594,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 365b0000
-      m_LastClickedID: 23350
-      m_ExpandedIDs: 22faffff6c5a0000365b0000
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 22faffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: JoyStick
-        m_OriginalName: JoyStick
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 23350
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 3}
       m_SearchString: 
@@ -880,7 +880,7 @@ MonoBehaviour:
   m_Position:
     m_Target: {x: 0, y: 14.126377, z: -14.37204}
     speed: 2
-    m_Value: {x: -0.000000059604645, y: 14.126376, z: -14.372039}
+    m_Value: {x: 0, y: 14.126377, z: -14.37204}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -933,7 +933,7 @@ MonoBehaviour:
   m_Size:
     m_Target: 0.6219981
     speed: 2
-    m_Value: 0.62340075
+    m_Value: 0.62199783
   m_Ortho:
     m_Target: 0
     speed: 2

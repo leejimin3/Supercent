@@ -1,12 +1,10 @@
 # 💎[Supercent] 하이퍼 캐주얼 게임 개발 아카데미 2기
 스크립트 경로 : My Project/Asset/Task/Day/Scripts
 
----
 ## Preview
 
 ![ezgif com-gif-maker (5)](https://user-images.githubusercontent.com/86705754/215335951-84bb1adc-ff78-4bf0-b97e-5e88da5774c0.gif)
 
----
 
 ## What is this Repository?
 
@@ -14,7 +12,7 @@ Supercent에서 진행한 하이퍼 캐주얼 게임 개발 아카데미 2기를
 
 (이 Repository는 기록형 Repository로 Workflow를 사용하지 않음)
 
----
+
 
 ## 강의 커리큘럼
 

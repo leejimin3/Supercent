@@ -35,7 +35,7 @@ C# 걍의
   - Hash
   - Tree
   - BST(이진 탐색 트리)
-  - Grape
+  - Graph
   
  실슬을 통한 학습 후 피드백
 

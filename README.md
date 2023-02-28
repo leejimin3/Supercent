@@ -4,6 +4,7 @@
 ## Preview
 
 ![ezgif com-gif-maker (5)](https://user-images.githubusercontent.com/86705754/215335951-84bb1adc-ff78-4bf0-b97e-5e88da5774c0.gif)
+![ezgif com-video-to-gif](https://user-images.githubusercontent.com/86705754/221917949-b150b7ce-f10c-4827-9505-37e66b971aae.gif)
 ![ezgif com-resize (1)](https://user-images.githubusercontent.com/86705754/221642136-db878c56-b088-47ff-ad3a-5100f4c519d0.gif)
 ![ezgif com-resize (2)](https://user-images.githubusercontent.com/86705754/221642173-acc18638-f1d2-4538-aa20-92c5752c6278.gif)
 ![ezgif com-video-to-gif](https://user-images.githubusercontent.com/86705754/221642248-686f2603-da72-4f6c-9964-a814e287d888.gif)
@@ -54,7 +55,7 @@ C# 걍의
   
 ### 5주차
 
-모작  
+![ezgif com-video-to-gif](https://user-images.githubusercontent.com/86705754/221917949-b150b7ce-f10c-4827-9505-37e66b971aae.gif)  
 
 Join & Clash 모작  
 Join & Clash의 리소스를 통해 본 게임을 동일하게 구현

@@ -67,10 +67,13 @@ Join & Clash의 리소스를 통해 본 게임을 동일하게 구현
 
 하이퍼 캐주얼 게임 기획 & 제작  
 
+
+
 Dropper.io  
 ![ezgif com-resize (1)](https://user-images.githubusercontent.com/86705754/221642136-db878c56-b088-47ff-ad3a-5100f4c519d0.gif)  
 (2배속)
 
+하늘에서 떨어지며 다른 플레이어보다 빠르게 결승지점에 도달하는 모바일 io게임
 
 ## 7주차 
 
@@ -80,6 +83,8 @@ Paint Man
 ![ezgif com-resize (2)](https://user-images.githubusercontent.com/86705754/221642173-acc18638-f1d2-4538-aa20-92c5752c6278.gif)  
 (2배속)
 
+제한된 시간내에 중앙에 있는 중립유닛들을 자신의 편으로 만들어 상대방을 이기는 io게임 
+
 ## 8주차  
 
 하이퍼 캐주얼 게임 기획 & 제작  
@@ -88,7 +93,7 @@ Slime-Rush
 ![ezgif com-video-to-gif](https://user-images.githubusercontent.com/86705754/221642248-686f2603-da72-4f6c-9964-a814e287d888.gif)  
 (2배속)
 
-  
+게이트와 중립 슬라임을 이용하여 최대한 많은 슬라임을 확보하는 러너게임
   
   
   

@@ -1,6 +1,7 @@
 # 💎[Supercent] 하이퍼 캐주얼 게임 개발 아카데미 2기
 3~4주차 실습 스크립트 경로 : My Project/Asset/Task/Day/Scripts
 
+
 ## Preview
 
 ![ezgif com-resize (1)](https://user-images.githubusercontent.com/86705754/221642136-db878c56-b088-47ff-ad3a-5100f4c519d0.gif)

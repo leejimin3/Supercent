@@ -21,7 +21,7 @@ Supercent에서 진행한 "하이퍼 캐주얼 게임 개발 아카데미 2기"�
 
 
 
-## urriculum
+## Curriculum
 
 ## 1주차
   
